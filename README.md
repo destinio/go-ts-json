@@ -10,8 +10,7 @@ When wielding this powerful tool, remember an essential rule: always close the r
 
 To vanquish this threat, you can use the legendary **`defer`** keyword. With a single stroke, it ensures the execution of a function upon the surrounding function's return:
 
-```
-goCopy code
+```go
 resp, err := http.Get("https://jsonplaceholder.typicode.com/posts")
 if err != nil {
     log.Fatal(err)
@@ -53,8 +52,7 @@ But before we embark on this journey, let us first understand two essential conc
 
 Structs in the realm of Go may bewilder the minds accustomed to the ways of TypeScript. However, fear not, for they possess great power in handling JSON data. Pay heed to the significance of field tags, for they shall aid you on your quest.
 
-```
-goCopy code
+```go
 // Behold! An example of a struct in Go, adorned with JSON field tags
 type Post struct {
     UserID int    `json:"userId"`
@@ -81,7 +79,7 @@ To wield this power, we shall invoke our Post struct and create an empty list of
 
 Finally, the posts shall manifest before us, just as you, dear TypeScript developer, are accustomed to:
 
-```
+```go
 goCopy code
 body, err := io.ReadAll(resp.Body)
 if err != nil {
@@ -98,7 +96,6 @@ if err != nil {
 }
 
 fmt.Println(posts[0].Title)
-
 ```
 
 ### **But what of marshalling, you ask?**
@@ -109,8 +106,7 @@ First, we shall create a new post, setting its values using the mighty Post stru
 
 Next, we invoke the **`json.Marshal`** spell to transform the new post into a variable, ripe for our manipulation.
 
-```
-goCopy code
+```go
 // Prepare for the great marshal!
 newPost := Post{
     UserID: 1,
@@ -134,8 +130,7 @@ fmt.Println(string(newPostJSON))
 
 But beware! To satisfy `http.Post`, we must transform the encoded data into a buffered `bytes.Buffer`, a peculiar requirement known only to the realms of Go. Fear not, for it shall be done!
 
-```
-goCopy code
+```go
 // Prepare for battle, make the POST request!
 bufferedPost := bytes.NewBuffer(newPostJSON)
 
@@ -154,8 +149,7 @@ Behold! With a successful request and a triumphant response, we shall deliver th
 
 In the following example, we shall even inspect the expected response status code:
 
-```
-goCopy code
+```go
 // ...
 body, err = io.ReadAll(resp.Body)
 if err != nil {
@@ -182,8 +176,7 @@ To make the call and summon the request, we shall employ **`resp, err = http.Def
 
 With the request object in our grasp, we shall invoke **`req.Header.Set`** to bestow upon it the desired headers.
 
-```
-goCopy code
+```go
 // Customize the request headers
 bufferedPost := bytes.NewBuffer(newPostJSON)
 
@@ -228,8 +221,7 @@ Ah, the art of handling errors in the realm of Go! Unlike TypeScript, Go require
 
 When making an API call in Go, you must confront the errors that may arise from the HTTP request and response:
 
-```
-goCopy code
+```go
 resp, err := http.Get("https://jsonplaceholder.typicode.com/posts")
 if err != nil {
     log.Fatal(err)
@@ -242,8 +234,7 @@ Observe the graceful dance between **`resp`** and **`err`**. The **`http.Get()`*
 
 Similarly, when decoding JSON in Go, we must confront errors related to the JSON data:
 
-```
-goCopy code
+```go
 var decodedPost Post
 err = json.Unmarshal(jsonBytes, &decodedPost)
 if err != nil {
